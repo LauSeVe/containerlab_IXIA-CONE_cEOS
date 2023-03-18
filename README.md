@@ -1,7 +1,7 @@
 #  IXIA-C ONE con tres Arista cEOS usando Containerlab
 
 Se va a desplegar la siguiente topología
-![Topología](https://github.com/LauSeVe/containerlab_IXIA-CONE_cEOS/blob/main/images/IxiaCeos.svg)
+![Topología](https://github.com/LauSeVe/containerlab_IXIA-CONE_cEOS/blob/main/images/IxiaCeos.jpg)
 
 Para esto, se necesita:
 - Tener descargada e instalada una versión de container lab
