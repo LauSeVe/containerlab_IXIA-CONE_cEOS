@@ -1,0 +1,29 @@
+name: ixiaceos
+
+topology:
+  nodes:
+    ixia-c:
+      kind: keysight_ixia-c-one
+      image: ghcr.io/open-traffic-generator/ixia-c-one:0.0.1-2755
+      exec:
+        - "./ifcfg add eth1 10.1.1.1 30"
+        - "./ifcfg add eth2 10.2.2.1 30"
+    ceos1:
+      kind: ceos
+      image: ceos:4.29.0.2F
+      startup-config: ceos1.cfg
+      exec:
+        - bash -c "ip l show eth2 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | head -1"
+    ceos2:
+      kind: ceos
+      image: ceos:4.29.0.2F
+      startup-config: ceos2.cfg
+    ceos3:
+      kind: ceos
+      image: ceos:4.29.0.2F
+      startup-config: ceos3.cfg
+  links:
+    - endpoints: ["ceos1:eth1", "ceos2:eth1"]
+    - endpoints: ["ceos2:eth2", "ceos3:eth1"]
+    - endpoints: ["ixia-c:eth1", "ceos1:eth2"]
+    - endpoints: ["ixia-c:eth2", "ceos3:eth2"]
